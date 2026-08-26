@@ -1,0 +1,6 @@
+ultralytics==8.0.228
+opencv-python-headless==4.8.1.78
+fastapi==0.104.1
+uvicorn==0.24.0.post1
+numpy<2.0.0
+sqlite3-api # Built-in, but good to note
