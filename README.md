@@ -45,3 +45,43 @@ Every few seconds, it logs a snapshot of the current occupancy.
 Because your CV loop and your API are running at the same time, main.py shares the live data between them using fastapi_app.state. This means that when someone visits [http://127.0.0.1:8000/stats](http://127.0.0.1:8000/stats) in their browser, the API can instantly grab the absolute latest In/Out numbers from the CV loop and display them as JSON.
 
 In summary: built a system that turns a raw video feed into structured, actionable retail data—all optimized to run entirely on the edge (your Raspberry Pi).
+
+Run commands:
+Installation & Setup
+1. Clone the repository and navigate to the directory:
+git clone https://github.com/Sancharib339/retail-model.git
+cd retail-model
+
+2. Create a virtual environment:
+python3 -m venv venv
+source venv/bin/activate
+
+3. Install dependencies:
+pip install -r requirements.txt
+
+4.Running the Pipeline
+To start the platform, run the main orchestrator script:
+python3 main.py
+A live video window will appear showing bounding boxes, tracking IDs, the virtual line, and live occupancy counts.
+
+Configuration:
+To change the video source (e.g., from a test video to a physical USB webcam), edit cv/config.py:
+
+Python
+CAMERA_SOURCE = 0 # Use 0 for Webcam, or "data/sample.mp4" for video files
+API Endpoints
+Once running, the FastAPI server exposes local endpoints for your dashboard (default: [http://127.0.0.1:8000](http://127.0.0.1:8000)).
+
+GET /stats
+Returns live metrics in JSON format.
+
+JSON
+{
+    "live_occupancy": 12,
+    "total_in": 45,
+    "total_out": 33,
+    "db_entries_today": 45,
+    "db_exits_today": 33
+}
+GET /heatmap
+Returns the accumulated heatmap.png as a JPEG binary stream, which can be embedded directly into an HTML <img> tag.
