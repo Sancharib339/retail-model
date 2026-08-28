@@ -4,9 +4,9 @@ venv/
 __pycache__/
 
 # Data and Media
-data/*.mp4
-data/*.db
-data/*.png
+#data/*.mp4
+#data/*.db
+#data/*.png
 
 # OS generated files
 .DS_Store
