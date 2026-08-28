@@ -70,14 +70,18 @@ class LineCounter:
                     continue
 
                 if side != prev_side:
+                    # Swapped: -1 to 1 is now an EXIT
                     if prev_side == -1 and side == 1:
-                        self.total_entries += 1
-                        events.append({"track_id": tid, "event_type": "entry", "x": cx, "y": cy})
-                        logger.info(f"Track {tid}: ENTRY (total entries={self.total_entries})")
-                    elif prev_side == 1 and side == -1:
                         self.total_exits += 1
                         events.append({"track_id": tid, "event_type": "exit", "x": cx, "y": cy})
                         logger.info(f"Track {tid}: EXIT (total exits={self.total_exits})")
+                    
+                    # Swapped: 1 to -1 is now an ENTRY
+                    elif prev_side == 1 and side == -1:
+                        self.total_entries += 1
+                        events.append({"track_id": tid, "event_type": "entry", "x": cx, "y": cy})
+                        logger.info(f"Track {tid}: ENTRY (total entries={self.total_entries})")
+                    
                     self._track_sides[tid] = side
         return events
 

@@ -24,7 +24,8 @@ DEVICE = "cpu"                  # RPi4 has no CUDA GPU
 # ---------------------------------------------------------------------------
 # Camera
 # ---------------------------------------------------------------------------
-CAMERA_SOURCE = "data/sample.mp4"                # 0 = default USB camera, or RTSP/file path
+#CAMERA_SOURCE = "data/sample.mp4"                # 0 = default USB camera, or RTSP/file path
+CAMERA_SOURCE = "data/entering-sample.mp4"
 FRAME_WIDTH = 640
 FRAME_HEIGHT = 480
 FRAME_SKIP = 2                   # run inference every Nth frame to save CPU
